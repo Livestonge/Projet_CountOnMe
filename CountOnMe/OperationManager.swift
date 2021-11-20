@@ -24,7 +24,10 @@ class OperationManager{
 	}
 	
 	var canAddOperator: Bool {
-			return elements.last != "+" && elements.last != "-"
+		switch elements.last {
+		case "+", "-", "x", "÷": return false
+		default: return true
+		}
 	}
 	
 	var expressionHaveResult: Bool {
@@ -42,6 +45,11 @@ class OperationManager{
 	func shoulAddOperand(_ operatorSymbol: String) -> Bool{
 		if canAddOperator{
 			elements.append(operatorSymbol.trimmingCharacters(in: .whitespaces))
+			if expressionHaveResult {
+				let newArray = [elements[elements.count - 2], elements.last!]
+				elements.removeAll()
+				elements = newArray
+			}
 			return true
 		}
 		return false
@@ -61,13 +69,16 @@ class OperationManager{
 				switch operand {
 				case "+": result = left + right
 				case "-": result = left - right
+				case "x": result = left * right
+				case "÷": result = left / right
 				default: fatalError("Unknown operator !")
 				}
 				
 				operationsToReduce = Array(operationsToReduce.dropFirst(3))
 				operationsToReduce.insert("\(result)", at: 0)
 		}
-		elements.append(" = \(operationsToReduce.first!)")
+		operationsToReduce.insert("=", at: 0)
+		elements += operationsToReduce
 	}
 }
 

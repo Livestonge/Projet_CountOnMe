@@ -58,6 +58,22 @@ class ViewController: UIViewController {
 				self.present(alertVC, animated: true, completion: nil)
 			}
     }
+	
+	@IBAction func tappedMultiplicationButton(_ sender: UIButton){
+		if operationManager.shoulAddOperand("x") == false {
+			let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
+			alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+			self.present(alertVC, animated: true, completion: nil)
+		}
+	}
+	
+	@IBAction func tappedDivisionButton(_ sender: UIButton){
+		if operationManager.shoulAddOperand("÷") == false {
+			let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
+			alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+			self.present(alertVC, animated: true, completion: nil)
+		}
+	}
 
     @IBAction func tappedEqualButton(_ sender: UIButton) {
 			guard operationManager.expressionIsCorrect else {
