@@ -36,7 +36,13 @@ class OperationManager{
 	
 	func add(element: String) {
 		if expressionHaveResult == false {
-			elements.append(element)
+			if canAddOperator && elements.isEmpty == false {
+				let lastElement = elements.removeLast()
+				let newElement = lastElement + element
+				elements.insert(newElement, at: elements.count)
+			}else{
+				elements.append(element)
+			}
 		}else {
 			elements.removeAll()
 		}
