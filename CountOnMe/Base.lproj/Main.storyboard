@@ -82,6 +82,9 @@
                                                             <fontDescription key="titleFontDescription" type="system" pointSize="30"/>
                                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="tappedMultiplicationButton:" destination="eqK-jh-KKu" eventType="touchUpInside" id="Kmf-GI-Vav"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -178,6 +181,9 @@
                                                             <fontDescription key="titleFontDescription" type="system" pointSize="60"/>
                                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="tappedDivisionButton:" destination="eqK-jh-KKu" eventType="touchUpInside" id="t3m-4m-q9m"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
