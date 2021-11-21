@@ -16,7 +16,7 @@ class OperationManager{
 	
 	// Error check computed variables
 	var expressionIsCorrect: Bool {
-		Operand.isOperand(elements.last ?? "")
+		Operand.isOperand(elements.last ?? "") == false
 	}
 	
 	var expressionHaveEnoughElement: Bool {
@@ -24,7 +24,7 @@ class OperationManager{
 	}
 	
 	var canAddOperator: Bool {
-		Operand.isOperand(elements.last ?? "")
+		Operand.isOperand(elements.last ?? "") == false
 	}
 	
 	var expressionHaveResult: Bool {
