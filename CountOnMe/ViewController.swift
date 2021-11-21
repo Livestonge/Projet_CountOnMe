@@ -43,53 +43,63 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedAdditionButton(_ sender: UIButton) {
-			
-			if operationManager?.shoulAddOperand("+") == false {
-				let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
-				alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-				self.present(alertVC, animated: true, completion: nil)
+			do{
+				try operationManager.shoulAddOperand("+")
+			}catch {
+				handleThrown(error)
 			}
     }
     
     @IBAction func tappedSubstractionButton(_ sender: UIButton) {
-			if operationManager.shoulAddOperand("-") == false {
-				let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
-				alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-				self.present(alertVC, animated: true, completion: nil)
+			do{
+				try operationManager.shoulAddOperand("-")
+			}catch {
+				handleThrown(error)
 			}
     }
 	
 	@IBAction func tappedMultiplicationButton(_ sender: UIButton){
-		if operationManager.shoulAddOperand("x") == false {
-			let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
-			alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-			self.present(alertVC, animated: true, completion: nil)
+		do{
+			try operationManager.shoulAddOperand("x")
+		}catch {
+			handleThrown(error)
 		}
 	}
 	
 	@IBAction func tappedDivisionButton(_ sender: UIButton){
-		if operationManager.shoulAddOperand("÷") == false {
-			let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
-			alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-			self.present(alertVC, animated: true, completion: nil)
+		do{
+			try operationManager.shoulAddOperand("÷")
+		}catch {
+			handleThrown(error)
 		}
 	}
 
     @IBAction func tappedEqualButton(_ sender: UIButton) {
-			guard operationManager.expressionIsCorrect else {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Entrez une expression correcte !", preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            return self.present(alertVC, animated: true, completion: nil)
-        }
-        
-			guard operationManager.expressionHaveEnoughElement else {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Démarrez un nouveau calcul !", preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            return self.present(alertVC, animated: true, completion: nil)
-        }
-        
-			operationManager.calculate()
+			do{
+				try operationManager.calculate()
+			}catch{
+				handleThrown(error)
+			}
+			
     }
+	
+	private func handleThrown(_ error: Error){
+		switch error{
+		case OperationError.NotAllowedToIncludOperand(let message):
+			alertUserWith(message: message)
+		case OperationError.NotEnoughtElements(let message):
+			alertUserWith(message: message)
+		case OperationError.NotCompleteOperation(let message):
+			alertUserWith(message: message)
+		default: alertUserWith(message: "Unknow error")
+		}
+	}
+	
+	private func alertUserWith(message: String){
+		let alertVC = UIAlertController(title: "Zéro!", message: message, preferredStyle: .alert)
+		alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+		self.present(alertVC, animated: true, completion: nil)
+	}
 
 }
 

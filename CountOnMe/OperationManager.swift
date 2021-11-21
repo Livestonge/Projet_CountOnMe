@@ -16,7 +16,7 @@ class OperationManager{
 	
 	// Error check computed variables
 	var expressionIsCorrect: Bool {
-		return elements.last != "+" && elements.last != "-"
+		Operand.isOperand(elements.last ?? "")
 	}
 	
 	var expressionHaveEnoughElement: Bool {
@@ -24,10 +24,7 @@ class OperationManager{
 	}
 	
 	var canAddOperator: Bool {
-		switch elements.last {
-		case "+", "-", "x", "÷": return false
-		default: return true
-		}
+		Operand.isOperand(elements.last ?? "")
 	}
 	
 	var expressionHaveResult: Bool {
@@ -48,22 +45,27 @@ class OperationManager{
 		}
 	}
 	
-	func shoulAddOperand(_ operatorSymbol: String) -> Bool{
-		if canAddOperator{
-			elements.append(operatorSymbol.trimmingCharacters(in: .whitespaces))
-			if expressionHaveResult {
-				let newArray = [elements[elements.count - 2], elements.last!]
-				elements.removeAll()
-				elements = newArray
-			}
-			return true
+	func shoulAddOperand(_ operatorSymbol: String) throws {
+		guard canAddOperator else {
+			throw OperationError.NotAllowedToIncludOperand("Un operateur est déja mis !")
 		}
-		return false
+		elements.append(operatorSymbol.trimmingCharacters(in : .whitespaces))
+		if expressionHaveResult {
+			let newArray = [elements[elements.count - 2], elements.last!]
+			elements.removeAll()
+			elements     = newArray
+		}
 	}
 	
-	func calculate(){
+	func calculate() throws {
 		// Create local copy of operations
 		var operationsToReduce = elements
+		
+		if expressionHaveEnoughElement == false {
+			throw OperationError.NotEnoughtElements("Démarrez un nouveau calcul !")
+		}else if expressionIsCorrect == false || expressionHaveResult == true {
+			throw OperationError.NotCompleteOperation("Entrez une expression correcte !")
+		}
 		
 		// Iterate over operations while an operand still here
 		while operationsToReduce.count > 1 {
@@ -90,4 +92,26 @@ class OperationManager{
 
 extension Notification.Name{
 	static let dataDidChange = Notification.Name("DatadidChange")
+}
+
+
+enum OperationError: Error{
+	case NotAllowedToIncludOperand(String)
+	case NotEnoughtElements(String)
+	case NotCompleteOperation(String)
+	case Unknown
+}
+
+enum Operand: String {
+	case addition = "+"
+	case substraction = "-"
+	case multiplication = "x"
+	case division = "÷"
+	
+	static func isOperand(_ expression: String) -> Bool {
+		switch expression {
+		case "+", "-", "x", "÷": return true
+		default: return false
+		}
+	}
 }
