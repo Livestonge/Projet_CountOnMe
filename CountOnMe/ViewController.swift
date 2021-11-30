@@ -18,7 +18,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+//			An instance of the OperationManager
 			  operationManager = OperationManager()
+//			starts listenning to the dataDidChange notification.
 			  NotificationCenter.default.addObserver(self,
 																						 selector: #selector(updateView),
 																						 name: .dataDidChange,
@@ -26,9 +28,9 @@ class ViewController: UIViewController {
 			  
     }
     
-	
+//	Method called when the controller gets an notification
 	@objc private func updateView(){
-		
+//	Updates the textview
 		textView.text = operationManager.elements.joined(separator: "")
 		
 	}
@@ -38,30 +40,36 @@ class ViewController: UIViewController {
         guard let numberText = sender.title(for: .normal) else {
             return
         }
-        
+//       Ask the model to add element.
 			  operationManager?.add(element: numberText)
     }
     
     @IBAction func tappedAdditionButton(_ sender: UIButton) {
 			do{
+//				Ask the operationManager to add an addition sign
 				try operationManager.shoulAddOperand("+")
 			}catch {
+//				An error is thrown if it is not appropriate to do so
 				handleThrown(error)
 			}
     }
     
     @IBAction func tappedSubstractionButton(_ sender: UIButton) {
 			do{
+//				Ask the operationManager to add an substraction sign
 				try operationManager.shoulAddOperand("-")
 			}catch {
+//				An error is thrown if it is not appropriate to do so
 				handleThrown(error)
 			}
     }
 	
 	@IBAction func tappedMultiplicationButton(_ sender: UIButton){
 		do{
+//			Ask the operationManager to add an substraction sign
 			try operationManager.shoulAddOperand("x")
 		}catch {
+//			An error is thrown if it is not appropriate to do so
 			handleThrown(error)
 		}
 	}
@@ -82,10 +90,11 @@ class ViewController: UIViewController {
 			}
 			
     }
-	
+//	Method for handling thrown error
 	private func handleThrown(_ error: Error){
 		switch error{
 		case OperationError.NotAllowedToIncludOperand(let message):
+//			Alerts the user by showing an alert view
 			alertUserWith(message: message)
 		case OperationError.NotEnoughtElements(let message):
 			alertUserWith(message: message)
@@ -95,6 +104,7 @@ class ViewController: UIViewController {
 		}
 	}
 	
+//	Method for instantiating an alert view with custom message
 	private func alertUserWith(message: String){
 		let alertVC = UIAlertController(title: "Zéro!", message: message, preferredStyle: .alert)
 		alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
