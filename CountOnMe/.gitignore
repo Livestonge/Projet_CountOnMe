@@ -26,3 +26,5 @@ DerivedData/
 /*.gcno
 
 *.pbxproj
+
+.DS_Store
