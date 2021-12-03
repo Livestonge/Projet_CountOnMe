@@ -31,7 +31,7 @@ class ViewController: UIViewController {
 //	Method called when the controller gets an notification
 	@objc private func updateView(){
 //	Updates the textview
-		textView.text = operationManager.elements.joined(separator: "")
+		textView.text = operationManager.expression.joined(separator: "")
 		
 	}
     

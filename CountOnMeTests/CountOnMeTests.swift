@@ -25,85 +25,85 @@ class CountOnMeTests: XCTestCase {
 	func testAdditions(){
 		
 		//given
-		sut.elements = ["2", "+", "3"]
+		sut.expression = ["2", "+", "3"]
 		
 		//when
 		try? sut.calculate()
 		
 		//then
-		XCTAssertEqual(sut.elements.last, "5")
+		XCTAssertEqual(sut.expression.last, "5")
 	}
 	
 	func testSubtraction(){
 		
 		//given
-		sut.elements = ["2", "-", "3"]
+		sut.expression = ["2", "-", "3"]
 		
 		//when
 		try? sut.calculate()
 		
 		//then
-		XCTAssertEqual(sut.elements.last, "-1")
+		XCTAssertEqual(sut.expression.last, "-1")
 	}
 	
 	func testMultiplication(){
 		
 		//given
-		sut.elements = ["2", "x", "3"]
+		sut.expression = ["2", "x", "3"]
 		
 		//when
 		try? sut.calculate()
 		
 		//then
-		XCTAssertEqual(sut.elements.last, "6")
+		XCTAssertEqual(sut.expression.last, "6")
 	}
 	
 	func testDivision(){
 		
 		//given
-		sut.elements = ["12", "÷", "3"]
+		sut.expression = ["12", "÷", "3"]
 		
 		//when
 		try? sut.calculate()
 		
 		//then
-		XCTAssertEqual(sut.elements.last, "4")
+		XCTAssertEqual(sut.expression.last, "4")
 	}
 	
 	func testEdgeCase_1(){
 		
 		// given
-		sut.elements = ["2", "+"]
+		sut.expression = ["2", "+"]
 		
 		// when
 		try? sut.shoulAddOperand("-")
 		
 		//then
-		XCTAssertEqual(sut.elements, ["2", "+"])
+		XCTAssertEqual(sut.expression, ["2", "+"])
 	}
 	
 	func testEdgeCase_2(){
 		
 		// given
-		sut.elements = ["2", "+", "3", "=", "5"]
+		sut.expression = ["2", "+", "3", "=", "5"]
 		
 		// when
 		try? sut.shoulAddOperand("+")
 		
 		//then
-		XCTAssertEqual(sut.elements, ["5", "+"])
+		XCTAssertEqual(sut.expression, ["5", "+"])
 	}
 	
 	func testEdgeCase_3(){
 		
 		// given
-		sut.elements = ["2", "x", "5", "÷", "2", "+", "4"]
+		sut.expression = ["2", "x", "5", "÷", "2", "+", "4"]
 		
 		// when
 		try? sut.calculate()
 		
 		//then
-		XCTAssertEqual(sut.elements.last, "9")
+		XCTAssertEqual(sut.expression.last, "9")
 	}
 
 }
