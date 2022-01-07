@@ -37,7 +37,6 @@
 
 /* Begin PBXFileReference section */
 		093FA67F2747B8490006E6D3 /* OperationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationManager.swift; sourceTree = "<group>"; };
-		0996B338274A83C200DD9CD9 /* CountOnMeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CountOnMeTest.swift; path = CountOnMeTests/CountOnMeTest.swift; sourceTree = "<group>"; };
 		0996B33E274A888300DD9CD9 /* CountOnMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountOnMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0996B340274A888300DD9CD9 /* CountOnMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountOnMeTests.swift; sourceTree = "<group>"; };
 		0996B34B274A953200DD9CD9 /* CountOnMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountOnMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,7 +95,6 @@
 		1FA43BC6224E569900F565CB = {
 			isa = PBXGroup;
 			children = (
-				0996B338274A83C200DD9CD9 /* CountOnMeTest.swift */,
 				1FA43BD1224E569900F565CB /* CountOnMe */,
 				0996B33F274A888300DD9CD9 /* CountOnMeTests */,
 				0996B34C274A953200DD9CD9 /* CountOnMeUITests */,
