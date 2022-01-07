@@ -85,7 +85,7 @@ class CountOnMeTests: XCTestCase {
 	func testEdgeCase_2(){
 		
 		// given
-		sut.expression = ["2", "+", "3", "=", "5"]
+		sut.expression = ["5"]
 		
 		// when
 		try? sut.shoulAddOperand("+")

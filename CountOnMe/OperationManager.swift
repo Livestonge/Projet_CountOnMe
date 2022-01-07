@@ -96,12 +96,12 @@ class OperationManager{
 				case "÷": result = left / right
 				default: fatalError("Unknown operator !")
 				}
-				
+//				After each operation of type A operand B, I drop those elements of the expression
 				operationsToReduce = Array(operationsToReduce.dropFirst(3))
 				operationsToReduce.insert("\(result)", at: 0)
 		}
-		operationsToReduce.insert("=", at: 0)
-		expression += operationsToReduce
+//		operationsToReduce.insert("=", at: 0)
+		expression = operationsToReduce
 	}
 }
 
