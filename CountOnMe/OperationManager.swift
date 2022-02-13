@@ -10,6 +10,7 @@ import Foundation
 
 class OperationManager{
 	
+  var startNewOperation = false
 // An array for the data entered by the user.
 	var expression =  [String](){
 //		Post a notification every time there is a change.
@@ -35,7 +36,7 @@ class OperationManager{
 	
 //	Adding an element to the expression
 	func add(element: String) {
-		if expressionHaveResult == false {
+		if startNewOperation == false {
 			if canAddOperator && expression.isEmpty == false {
 //				adding element in the case where the last element is an element.
 				let lastElement = expression.removeLast()
@@ -50,6 +51,7 @@ class OperationManager{
 			expression.removeAll()
 //			adds the element to the expression
 			expression.append(element)
+      startNewOperation = false
 		}
 	}
 	
@@ -101,7 +103,8 @@ class OperationManager{
 				operationsToReduce.insert("\(result)", at: 0)
 		}
 //		operationsToReduce.insert("=", at: 0)
-		expression = operationsToReduce
+      startNewOperation = true
+		  expression = operationsToReduce
 	}
 }
 
