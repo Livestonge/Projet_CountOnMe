@@ -106,7 +106,7 @@ class ViewController: UIViewController {
 		case OperationError.NotCompleteOperation(let message):
 			alertUserWith(message: message)
     case OperationError.zeroDivisionNotPossible:
-      alertUserWith(message: "Sorry its not possible to divide by zero!!!")
+      alertUserWith(message: "Sorry its not possible to divide by zero!!")
 		default: alertUserWith(message: "Unknown error")
 		}
 	}

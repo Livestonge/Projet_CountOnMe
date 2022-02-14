@@ -93,18 +93,6 @@ class CountOnMeTests: XCTestCase {
 		//then
 		XCTAssertEqual(sut.expression, ["5", "+"])
 	}
-  
-  func testEdgeCase_4(){
-    
-    // when
-    try? sut.shoulAddOperand("-")
-    sut.add(element: "0")
-    try? sut.shoulAddOperand("÷")
-    sut.add(element: "6")
-    try? sut.showEndResult()
-    //then
-    XCTAssertEqual(sut.expression, ["0"])
-  }
 	
 	func testEdgeCase_3(){
 		
@@ -118,5 +106,29 @@ class CountOnMeTests: XCTestCase {
 		//then
     XCTAssertEqual(sut.expression.joined(separator: ""), "10÷")
 	}
+  
+  func testEdgeCase_4(){
+    
+    // when
+    try? sut.shoulAddOperand("-")
+    sut.add(element: "0")
+    try? sut.shoulAddOperand("÷")
+    sut.add(element: "6")
+    try? sut.showEndResult()
+    //then
+    XCTAssertEqual(sut.expression, ["0"])
+  }
+  
+  func testEdgeCase_5(){
+    
+    // when
+    sut.add(element: "6")
+    try? sut.shoulAddOperand("÷")
+    sut.add(element: "3")
+    try? sut.showEndResult()
+    sut.add(element: "3")
+    //then
+    XCTAssertEqual(sut.expression, ["3"])
+  }
 
 }
