@@ -7,6 +7,7 @@
 //
 import Foundation
 import XCTest
+@testable import CountOnMe
 
 class CountOnMeUITests: XCTestCase {
 	
@@ -88,16 +89,29 @@ class CountOnMeUITests: XCTestCase {
 		//then
 		XCTAssertEqual(textViewElement.value as? String, expression)
 	}
+  
+  func testZeroDivision(){
+    
+//    When
+    app.buttons["6"].tap()
+    app.buttons["÷"].tap()
+    app.buttons["0"].tap()
+    app.buttons["="].tap()
+    
+    //then
+    XCTAssertTrue(app.alerts["Zéro!"].scrollViews.otherElements.staticTexts["Sorry its not possible to divide by zero!!"].exists)
+  }
 	
-	func testMultiOperandOperation(){
+  	func testMultiOperandOperation(){
 		//when
-		var expression = createRandomOperation()
-		let operand = randomOperand
-		app.buttons[operand].tap()
-		expression += operand
-		expression += createRandomOperation()
+    app.buttons["4"].tap()
+		app.buttons["x"].tap()
+    app.buttons["3"].tap()
+    let newOperand = randomOperand
+      app.buttons[newOperand].tap()
+		let expression = ["12\(newOperand)"]
 		//then
-		XCTAssertEqual(textViewElement.value as? String, expression)
+    XCTAssertEqual(textViewElement.value as? String, expression.joined(separator: ""))
 	}
 	
 	func testOperandsMisuse(){

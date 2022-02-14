@@ -84,12 +84,17 @@ class ViewController: UIViewController {
 
     @IBAction func tappedEqualButton(_ sender: UIButton) {
 			do{
-				try operationManager.calculate()
+        try operationManager.showEndResult()
 			}catch{
 				handleThrown(error)
 			}
 			
     }
+  
+  @IBAction func didTapResetButton(_ sender: UIButton){
+    self.operationManager.reset()
+  }
+  
 //	Method for handling thrown error
 	private func handleThrown(_ error: Error){
 		switch error{
@@ -100,7 +105,9 @@ class ViewController: UIViewController {
 			alertUserWith(message: message)
 		case OperationError.NotCompleteOperation(let message):
 			alertUserWith(message: message)
-		default: alertUserWith(message: "Unknow error")
+    case OperationError.zeroDivisionNotPossible:
+      alertUserWith(message: "Sorry its not possible to divide by zero!!!")
+		default: alertUserWith(message: "Unknown error")
 		}
 	}
 	
