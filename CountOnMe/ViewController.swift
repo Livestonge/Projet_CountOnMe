@@ -47,47 +47,47 @@ class ViewController: UIViewController {
     @IBAction func tappedAdditionButton(_ sender: UIButton) {
 			do{
 //				Ask the operationManager to add an addition sign
+//        An error is thrown if it is not appropriate to do so
 				try operationManager.shoulAddOperand("+")
-			}catch {
-//				An error is thrown if it is not appropriate to do so
-				handleThrown(error)
-			}
+			}catch let error as OperationError {
+        handleThrown(error)
+      }catch{}
     }
     
     @IBAction func tappedSubstractionButton(_ sender: UIButton) {
 			do{
 //				Ask the operationManager to add an substraction sign
+//        An error is thrown if it is not appropriate to do so
 				try operationManager.shoulAddOperand("-")
-			}catch {
-//				An error is thrown if it is not appropriate to do so
-				handleThrown(error)
-			}
+			}catch let error as OperationError {
+        handleThrown(error)
+      }catch{}
     }
 	
 	@IBAction func tappedMultiplicationButton(_ sender: UIButton){
 		do{
 //			Ask the operationManager to add an substraction sign
+//      An error is thrown if it is not appropriate to do so
 			try operationManager.shoulAddOperand("x")
-		}catch {
-//			An error is thrown if it is not appropriate to do so
-			handleThrown(error)
-		}
+		}catch let error as OperationError {
+      handleThrown(error)
+    }catch{}
 	}
-	
+  
 	@IBAction func tappedDivisionButton(_ sender: UIButton){
 		do{
 			try operationManager.shoulAddOperand("÷")
-		}catch {
-			handleThrown(error)
-		}
+		}catch let error as OperationError {
+      handleThrown(error)
+    }catch{}
 	}
 
     @IBAction func tappedEqualButton(_ sender: UIButton) {
 			do{
         try operationManager.showEndResult()
-			}catch{
+			}catch let error as OperationError {
 				handleThrown(error)
-			}
+      }catch{}
 			
     }
   
@@ -96,19 +96,9 @@ class ViewController: UIViewController {
   }
   
 //	Method for handling thrown error
-	private func handleThrown(_ error: Error){
-		switch error{
-		case OperationError.NotAllowedToIncludOperand(let message):
-//			Alerts the user by showing an alert view
-			alertUserWith(message: message)
-		case OperationError.NotEnoughtElements(let message):
-			alertUserWith(message: message)
-		case OperationError.NotCompleteOperation(let message):
-			alertUserWith(message: message)
-    case OperationError.zeroDivisionNotPossible:
-      alertUserWith(message: "Sorry its not possible to divide by zero!!")
-		default: alertUserWith(message: "Unknown error")
-		}
+	private func handleThrown(_ error: OperationError){
+    //      Alerts the user by showing an alert view
+    alertUserWith(message: error.description)
 	}
 	
 //	Method for instantiating an alert view with custom message
