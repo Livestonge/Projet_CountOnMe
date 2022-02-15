@@ -36,7 +36,8 @@ class OperationManager{
 			if canAddOperator && expression.isEmpty == false {
 //		adding element in the case where the last element is an element.
 				let lastElement = expression.removeLast()
-        let newElement = !startNewOperation ? lastElement + element : element
+// Checks if we should append or not.
+        let newElement = !startNewOperation || !expression.endsWithOperand ? lastElement + element : element
 				expression.insert(newElement, at: expression.count)
 			}else{
 //				in the case where the last element is  an operand

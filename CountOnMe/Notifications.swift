@@ -12,3 +12,11 @@ import Foundation
 extension Notification.Name{
   static let dataDidChange = Notification.Name("DatadidChange")
 }
+
+extension Array where Element == String{
+  
+  var endsWithOperand: Bool{
+    let operands = Operand.operands
+    return operands.contains(self.last ?? "")
+  }
+}

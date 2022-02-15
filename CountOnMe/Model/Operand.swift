@@ -9,7 +9,7 @@
 import Foundation
 
 // Custom type for the different types
-enum Operand: String {
+enum Operand: String, CaseIterable {
   case addition = "+"
   case substraction = "-"
   case multiplication = "x"
@@ -20,5 +20,9 @@ enum Operand: String {
     case "+", "-", "x", "÷": return true
     default: return false
     }
+  }
+  
+  static var operands: [String]{
+    return Operand.allCases.map(\.rawValue)
   }
 }

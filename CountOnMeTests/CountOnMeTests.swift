@@ -128,7 +128,19 @@ class CountOnMeTests: XCTestCase {
     try? sut.showEndResult()
     sut.add(element: "3")
     //then
-    XCTAssertEqual(sut.expression, ["3"])
+    XCTAssertEqual(sut.expression, ["23"])
+  }
+  
+  func testEdgeCase_6(){
+    // when
+    sut.add(element: "6")
+    try? sut.shoulAddOperand("÷")
+    sut.add(element: "3")
+    try? sut.showEndResult()
+    sut.add(element: "2")
+    sut.reset()
+    //then
+    XCTAssertEqual(sut.expression, [])
   }
 
 }
